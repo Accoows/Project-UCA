@@ -12,3 +12,4 @@ M = fichier_vers_matrice('space-invader-pieuvre.pbm')
 M[3][4] = 1
 matrice_vers_fichier(M,'space-invader-pieuvre2.pbm')
 voir_fichier('space-invader-pieuvre2.pbm')
+
