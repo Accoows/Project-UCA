@@ -42,7 +42,7 @@ par un triplet d’octet correspondant à sa couleur au format RGB
 """
 
 ## déclaration des fonctions exportées lors du from pnm import *
-__all__ = ['voir_matrice','voir_fichier','fichier_vers_matrice','matrice_vers_fichier']
+__all__ = ['voir_matrice','voir_fichier','fichier_vers_matrice','matrice_vers_fichier','dimensions','matrice_vide','matrice_booléens','matrice_couleur']
 
 ##########################
 ##                      ##
