@@ -7,3 +7,7 @@ def remplace(x,y,L):
         
 
 L = [1,6,8,3,2,3,1]
+
+
+remplace(3,15,L)
+print(L)
