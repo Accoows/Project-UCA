@@ -2,7 +2,6 @@ import tkinter as tk
 from math import *
 from random import *
 
-
 ################# Idee à faire #####################
 # Installation d'un curseur qui multiplie le temps 
 # Choix d'un systeme solaire verticale ou horizontale
@@ -23,16 +22,35 @@ class État():
     
     def __init__(self):
         (L, H) = (Largeur, Hauteur)
-        self.étoiles = [(randint(50, L), randint(50, H)) for e in range(300)]
+        self.étoiles = [(randint(0, L), randint(0, H)) for e in range(1000)]
         self.temps = 0
         self.centre_x = Largeur//2
         self.centre_y = Hauteur//2
         self.rayon_base = 0
-        self.rayon_terre = 20 ; self.rayon_lune = 5 ; self.rayon_soleil = 60 ; self.rayon_mercure = 20
-        self.rayon_x_terre = 200 ; self.rayon_y_terre = 40
-        self.rayon_x_lune = 80 ; self.rayon_y_lune = 12
-        self.rayon_x_mercure = 150 ; self.rayon_y_mercure = 40
-        self.vitesse_terre = 1/365 ; self.vitesse_lune = 1/27.3 ; self.vitesse_mercure = 1/88
+        
+        ############################
+        #Soleil
+        self.rayon_soleil = 60;
+        #Terre
+        self.rayon_terre = 15; self.rayon_x_terre = 200; self.rayon_y_terre = 40; self.vitesse_terre = 1/365;
+        #Lune
+        self.rayon_lune = 5; self.rayon_x_lune = 50; self.rayon_y_lune = 15; self.vitesse_lune = 1/27.3;
+        #Mercure
+        self.rayon_mercure = 15; self.rayon_x_mercure = 100; self.rayon_y_mercure = 40; self.vitesse_mercure = 1/88;
+        #Venus
+        self.rayon_venus = None; self.rayon_x_venus = None; self.rayon_y_venus = None; self.vitesse_venus = None;
+        #Mars
+        self.rayon_mars = None; self.rayon_x_mars = None; self.rayon_y_mars = None; self.vitesse_mars = None;
+        #Jupiter
+        self.rayon_jupiter = None; self.rayon_x_jupiter = None; self.rayon_y_jupiter = None; self.vitesse_jupiter = None;
+        #Saturne
+        self.rayon_saturne = None; self.rayon_x_saturne = None; self.rayon_y_saturne = None; self.vitesse_jupiter = None;
+        #Uranus
+        self.rayon_uranus = None; self.rayon_x_uranus = None; self.rayon_y_uranus = None; self.vitesse_saturne = None;
+        #Neptune
+        self.rayon_neptune = None; self.rayon_x_neptune = None ; self.rayon_y_neptune = None; self.vitesse_neptune = None;
+        ############################
+
         self.pause = False
         self.affichage()
         
@@ -49,23 +67,23 @@ class État():
         # Positions de la Terre et de la Lune
         (x1, y1) = rotation(x0, y0, self.rayon_x_terre, self.rayon_y_terre, self.vitesse_terre, self.temps)
         (x2, y2) = rotation(x1, y1, self.rayon_x_lune, self.rayon_y_lune, self.vitesse_lune, self.temps)
-
         # Position de Mercure
         (x3, y3) = rotation(x0, y0, self.rayon_x_mercure, self.rayon_y_mercure, self.vitesse_mercure, self.temps)
+
         
         # Profondeur de la Terre/Lune par rapport au Soleil
         if y1 >= y0:                                         # Terre en bas de l'ellipse du Soleil
             disque(x0, y0, self.rayon_soleil, '#ECD600')      # Soleil par-dessus tout
             if y1 >= y2:                                     # Lune en bas de l'ellipse de la Terre
                 disque(x2, y2, self.rayon_lune, '#A4A4A4')      # Lune ensuite
-            disque(x1, y1, self.rayon_terre, 'blue')         # Terre d'abord                
+            disque(x1, y1, self.rayon_terre, '#0042FF')         # Terre d'abord                
             if y1 < y2:                                      # Lune en haut de l'ellipse de la Terre
                 disque(x2, y2, self.rayon_lune, '#A4A4A4')      # Lune derrière la Terre
         else:                                                # Terre en haut de l'ellipse du Soleil
             disque(x0, y0, self.rayon_soleil, '#ECD600')      # Soleil par-dessus tout
             if y1 >= y2:                                     # Lune en bas de l'ellipse de la Terre
                 disque(x2, y2, self.rayon_lune, '#A4A4A4')      # Lune devant la Terre
-            disque(x1, y1, self.rayon_terre, 'blue')         # Terre par-dessus le Soleil
+            disque(x1, y1, self.rayon_terre, '#0042FF')         # Terre par-dessus le Soleil
             disque(x0, y0, self.rayon_soleil, '#ECD600')      # Soleil par-dessus la Terre
             if y1 < y2:                                      # Lune en haut de l'ellipse de la Terre
                 disque(x2, y2, self.rayon_lune, '#A4A4A4')      # Lune derrière la Terre
@@ -112,7 +130,7 @@ def pause(event):
 #Curseur d'aggrandissement   
 curseur_systeme = tk.Scale(root, orient="horizontal", length=Largeur,
                         label='Taille',command=modif_taille_planete,
-                        from_=20, to=100)
+                        from_=40, to=100)
 
 curseur_systeme.pack(side="left")
 
