@@ -16,10 +16,12 @@ class État():
         self.temps = 0
         self.centre_x = Largeur//2
         self.centre_y = Hauteur//2
-        self.rayon_terre = 20 ; self.rayon_lune = 5 ; self.rayon_soleil = 40
-        self.rayonx_terre = 300 ; self.rayony_terre = 40
+        self.rayon_terre = 20 ; self.rayon_lune = 5 ; self.rayon_soleil = 60 ; self.rayon_mercure = 15
+        self.rayonx_terre = 200 ; self.rayony_terre = 40
         self.rayonx_lune = 80 ; self.rayony_lune = 12
-        self.vitesse_terre = 1/100 ; self.vitesse_lune = 6/100
+        self.rayonx_mercure = 150 ; self.rayony_mercure = 40
+        self.vitesse_terre = 1/100 ; self.vitesse_lune = 6/100 ; self.vitesse_mercure = 10/100
+        self.pause = False
         self.affichage()
         
     def affichage(self):
@@ -34,26 +36,29 @@ class État():
         (x1, y1) = rotation(x0, y0, self.rayonx_terre, self.rayony_terre, self.vitesse_terre, self.temps)
         (x2, y2) = rotation(x1, y1, self.rayonx_lune, self.rayony_lune, self.vitesse_lune, self.temps)
         # Position de Mercure
-        (x3, y3) = rotation(x0, y0, self.rayonx_terre, self.rayony_terre, self.vitesse_terre, self.temps)
+        (x3, y3) = rotation(x0, y0, self.rayonx_mercure, self.rayony_mercure, self.vitesse_mercure, self.temps)
         
         # Dessin dans l'ordre correct pour la profondeur
         if y1 >= y0:  # Terre en bas de l'ellipse du Soleil
             disque(x0, y0, self.rayon_soleil, 'yellow')  # Soleil par-dessus tout
-            if y2 >= y1:  # Lune en bas de l'ellipse de la Terre
+            if y1 >= y2:  # Lune en bas de l'ellipse de la Terre
                 disque(x2, y2, self.rayon_lune, 'gray')  # Lune ensuite
             disque(x1, y1, self.rayon_terre, 'blue')  # Terre d'abord                
-            if y2 < y1:  # Lune en haut de l'ellipse de la Terre
+            if y1 < y2:  # Lune en haut de l'ellipse de la Terre
                 disque(x2, y2, self.rayon_lune, 'gray')  # Lune derrière la Terre
         else:  # Terre en haut de l'ellipse du Soleil
-            if y2 >= y1:  # Lune en bas de l'ellipse de la Terre
+            disque(x0, y0, self.rayon_soleil, 'yellow')
+            if y1 >= y2:  # Lune en bas de l'ellipse de la Terre
                 disque(x2, y2, self.rayon_lune, 'gray')  # Lune devant la Terre
             disque(x1, y1, self.rayon_terre, 'blue') # Terre par-dessus le Soleil
             disque(x0, y0, self.rayon_soleil, 'yellow')  # Soleil par-dessus la Terre
-            if y2 < y1:  # Lune en haut de l'ellipse de la Terre
+            if y1 < y2:  # Lune en haut de l'ellipse de la Terre
                 disque(x2, y2, self.rayon_lune, 'gray')  # Lune derrière la Terre
+                disque(x0, y0, self.rayon_soleil, 'yellow')
             
 def tictac():
-    état.temps += 1
+    if not état.pause:
+        état.temps += 1
     état.affichage()
     Dessin.after(20, tictac)
     
@@ -71,6 +76,9 @@ def modif_taille_planete(x):
     état.rayon_lune = (int(x)/6)
     état.affichage()
 
+def pause(event):
+    état.pause = not état.pause
+
 #Curseur d'aggrandissement   
 curseur_systeme = tk.Scale(root, orient="horizontal", length=Largeur,
                         label='Taille',command=modif_taille_planete,
@@ -81,5 +89,6 @@ curseur_systeme.pack(side="left")
 
 
 état = État()
+root.bind('<space>', pause)
 tictac()
 root.mainloop()
