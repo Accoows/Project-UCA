@@ -32,13 +32,13 @@ class État():
         #Soleil
         self.rayon_soleil = 60;
         #Terre
-        self.rayon_terre = 15; self.rayon_x_terre = 200; self.rayon_y_terre = 40; self.vitesse_terre = 1/365;
+        self.rayon_terre = 20; self.rayon_x_terre = 200; self.rayon_y_terre = 40; self.vitesse_terre = (1/365)*4;
         #Lune
-        self.rayon_lune = 5; self.rayon_x_lune = 50; self.rayon_y_lune = 15; self.vitesse_lune = 1/27.3;
+        self.rayon_lune = 5; self.rayon_x_lune = 50; self.rayon_y_lune = 15; self.vitesse_lune = (1/27.3)*4;
         #Mercure
-        self.rayon_mercure = 15; self.rayon_x_mercure = 100; self.rayon_y_mercure = 40; self.vitesse_mercure = 1/88;
+        self.rayon_mercure = 10; self.rayon_x_mercure = 100; self.rayon_y_mercure = 40; self.vitesse_mercure = (1/88)*4;
         #Venus
-        self.rayon_venus = None; self.rayon_x_venus = None; self.rayon_y_venus = None; self.vitesse_venus = None;
+        self.rayon_venus = 15; self.rayon_x_venus = 150; self.rayon_y_venus = 40; self.vitesse_venus = (1/225)*4;
         #Mars
         self.rayon_mars = None; self.rayon_x_mars = None; self.rayon_y_mars = None; self.vitesse_mars = None;
         #Jupiter
@@ -69,9 +69,11 @@ class État():
         (x2, y2) = rotation(x1, y1, self.rayon_x_lune, self.rayon_y_lune, self.vitesse_lune, self.temps)
         # Position de Mercure
         (x3, y3) = rotation(x0, y0, self.rayon_x_mercure, self.rayon_y_mercure, self.vitesse_mercure, self.temps)
+        # Position de Venus
+        (x4, y4) = rotation(x0, y0, self.rayon_x_venus, self.rayon_y_venus, self.vitesse_venus, self.temps)
 
         
-        # Profondeur de la Terre/Lune par rapport au Soleil
+        # Profondeur Terre/Lune -> Soleil
         if y1 >= y0:                                         # Terre en bas de l'ellipse du Soleil
             disque(x0, y0, self.rayon_soleil, '#ECD600')      # Soleil par-dessus tout
             if y1 >= y2:                                     # Lune en bas de l'ellipse de la Terre
@@ -89,13 +91,22 @@ class État():
                 disque(x2, y2, self.rayon_lune, '#A4A4A4')      # Lune derrière la Terre
                 disque(x0, y0, self.rayon_soleil, '#ECD600')  # Soleil devant la lune
 
+        # Profondeur Mercure -> Soleil
         if y0 >= y3:
             disque(x3, y3, self.rayon_mercure, '#797C68')
             disque(x0, y0, self.rayon_soleil, '#ECD600')
         else:
             disque(x0, y0, self.rayon_soleil, '#ECD600')
             disque(x3, y3, self.rayon_mercure, '#797C68')
-            
+#
+        ## Profondeur Venus -> Soleil
+        #if y0 >= y4:
+        #    disque(x4, y4, self.rayon_venus, '#C08115')
+        #    disque(x0, y0, self.rayon_soleil, '#ECD600')
+        #else:
+        #    disque(x0, y0, self.rayon_soleil, '#ECD600')
+        #    disque(x4, y4, self.rayon_venus, '#C08115')
+    
             
 #Timer
 def tictac():
@@ -121,18 +132,20 @@ def modif_taille_planete(x):
     état.rayon_terre = état.rayon_base // 4
     état.rayon_lune = état.rayon_base // 6
     état.rayon_mercure = état.rayon_base // 4
+    état.rayon_venus = état.rayon_base // 4
     état.affichage()
+
 
 #Fonction de pause (stop)
 def pause(event):
     état.pause = not état.pause
 
-#Curseur d'aggrandissement   
-curseur_systeme = tk.Scale(root, orient="horizontal", length=Largeur,
+#Curseur d'agrandissement   
+curseur_taille = tk.Scale(root, orient="vertical", length=Largeur,
                         label='Taille',command=modif_taille_planete,
                         from_=40, to=100)
 
-curseur_systeme.pack(side="left")
+curseur_taille.pack(side="left")
 
 
 
