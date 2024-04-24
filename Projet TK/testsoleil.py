@@ -31,3 +31,12 @@ root.mainloop() # À mettre à la fin de chaque programme Tk
 #    état.vitesse_saturne = (état.vitesse_saturne + vitesse_base)
 #    état.vitesse_neptune = (état.vitesse_neptune + vitesse_base)
 #    état.affichage()
+#
+#from tkinter import *   
+#def create():
+#    win = Toplevel(root)
+#root = Tk()
+#root.geometry('200x100')  
+#btn = Button(root, text="Créer une nouvelle fenêtre", command = create)
+#btn.pack(pady = 10) 
+#root.mainloop()
