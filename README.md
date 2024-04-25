@@ -1,4 +1,4 @@
-# Repository pour la sauvegarde des fichiers de la fac - Programmation Impérative
+# Répertoire de sauvegarde des fichiers de Fac - Programmation Impérative
 
 Ce dépôt GitHub a été créé dans le cadre de l'unité d'enseignement "Programmation Impérative" afin de sauvegarder et de partager les travaux pratiques (TP) ainsi que le projet facultatif réalisés au cours de cette unité.
 
