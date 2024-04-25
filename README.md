@@ -46,4 +46,4 @@ Bien que les contributions externes ne soient pas attendues pour ce dépôt, je 
 
 ## Auteur
 
-Ce dépôt est maintenu par Accoow.
+Ce dépôt est maintenu par Accoow & les cours / corrections sont issus de [Oliver Baldellon](https://www.oliver.baldellon.eu/python)
