@@ -18,25 +18,25 @@ def profondeur_max_pair(A):
         
         
         
-def remplacer(A, op1, op2):
-if est_feuille(A):
-return A
-else:
-Ag = remplacer(fg(A),op1,op2)
-Ad = remplacer(fd(A),op1,op2)
-if racine(A)==op1:
-op=op2
-else:
-op=racine(A)
-return arbre(op,Ag,Ad)
-
-def compter(A, op):
-if est_feuille(A):
-return 0
-else:
-rg = compter(fg(A),op)
-rd = compter(fd(A),op)
-if racine(A) == op:
-return 1 + rg + rd
-else:
-return rg + rd
+# def remplacer(A, op1, op2):
+#     if est_feuille(A):
+#         return A
+#     else:
+#         Ag = remplacer(fg(A),op1,op2)
+#         Ad = remplacer(fd(A),op1,op2)
+#         if racine(A)==op1:
+#             op=op2
+#         else:
+#             op=racine(A)
+#     return arbre(op,Ag,Ad)
+#
+# def compter(A, op):
+#     if est_feuille(A):
+#         return 0
+#     else:
+#         rg = compter(fg(A),op)
+#         rd = compter(fd(A),op)
+#         if racine(A) == op:
+#             return 1 + rg + rd
+#         else:
+#             return rg + rd
