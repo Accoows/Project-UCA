@@ -1,22 +1,21 @@
-
-from tkinter import *
-from math import *
-from random import *
-
-
-(Hauteur,Largeur) = (800,1400)
-root = Tk()
-root.title("Révolution")
-Dessin = Canvas(root,height=Hauteur,width=Largeur,bg='black')
-Dessin.pack()
-
-imgfile = '../Projet TK/Soleil.png'
-img = PhotoImage(file=imgfile)
-img_2 = img.subsample(1,1)
-
-image = Dessin.create_image(Largeur/2,Hauteur/2,image=img_2)
-
-root.mainloop() # À mettre à la fin de chaque programme Tk
+# from tkinter import *
+# from math import *
+# from random import *
+#
+#
+# (Hauteur,Largeur) = (800,1400)
+# root = Tk()
+# root.title("Révolution")
+# Dessin = Canvas(root,height=Hauteur,width=Largeur,bg='black')
+# Dessin.pack()
+#
+# imgfile = '../Projet TK/Soleil.png'
+# img = PhotoImage(file=imgfile)
+# img_2 = img.subsample(1,1)
+#
+# image = Dessin.create_image(Largeur/2,Hauteur/2,image=img_2)
+#
+# root.mainloop() # À mettre à la fin de chaque programme Tk
 
 
 #Fonction changement de vitesse des planètes
@@ -32,11 +31,29 @@ root.mainloop() # À mettre à la fin de chaque programme Tk
 #    état.vitesse_neptune = (état.vitesse_neptune + vitesse_base)
 #    état.affichage()
 #
-#from tkinter import *   
-#def create():
+import tkinter as tk
+
+(Hauteur, Largeur) = (800, 800)
+root = tk.Tk()
+root.title("Révolution")
+Dessin = tk.Canvas(root, height=Hauteur, width=Largeur, bg='white')
+Dessin.pack()
+
+# def settings():
+#     win = Toplevel()
+#     win.title("Settings")
+#     label = Label(win, text='Coucou')
+#     label.pack()
+
+
+bouton1 = tk.Button(root, text="Créer une nouvelle fenêtre", command=None)
+bouton1.pack()
+root.mainloop()
+
+# root = Tk()
+# def create():
 #    win = Toplevel(root)
-#root = Tk()
-#root.geometry('200x100')  
-#btn = Button(root, text="Créer une nouvelle fenêtre", command = create)
-#btn.pack(pady = 10) 
-#root.mainloop()
+# root.geometry('200x100')
+# btn = Button(root, text="Créer une nouvelle fenêtre", command = create)
+# btn.pack()
+# root.mainloop()
