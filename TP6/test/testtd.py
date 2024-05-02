@@ -106,8 +106,8 @@ def longueurs_mots():
         L.append(len(longueurs))
     
 
-def longueur_max(dict):
-    global L
-    max_mots = [len(dict[0]),dict[0]]
-    for i in dict:
-        if len(i)
+# def longueur_max(dict):
+#     global L
+#     max_mots = [len(dict[0]),dict[0]]
+#     for i in dict:
+#         if len(i)

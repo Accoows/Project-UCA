@@ -216,7 +216,7 @@ def settings():
     win.title("Settings")
     win.geometry("400x400")
     (Hauteur, Largeur) = (400, 400)
-    curseur_taille = tk.Scale(win, orient="horizontal" ,length=Largeur,
+    curseur_taille = tk.Scale(win, orient="horizontal"maju,length=Largeur,
                               label='Taille', command=modif_taille_planete,
                               from_=20, to=35)
 
