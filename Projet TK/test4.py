@@ -28,7 +28,7 @@ class État():
         self.centre_y = Hauteur // 2
         self.rayon_base = 0
 
-        self.modif_vitesse = 4
+        self.modif_vitesse = 0
 
         ############################
         #Soleil
@@ -220,6 +220,11 @@ def modif_taille_planete(x):
 def pause(event):
     état.pause = not état.pause
 
+def vitesse_planete(x):
+    état.modif_vitesse = int(x)
+    état.affichage()
+
+
 #   Event Clavier 'D,F,G,H,J,K,L,M'
 def aff_mercure(event): état.aff_mercure = not état.aff_mercure
 def aff_venus(event): état.aff_venus = not état.aff_venus
@@ -254,22 +259,32 @@ def settings():
     win = tk.Toplevel()
     win.title("Settings")
     win.geometry("400x400")
+    #   Curseur de taille
     curseur_taille = tk.Scale(win, orient="vertical", length=Hauteur,
                               label='Taille', command=modif_taille_planete,
                               from_=20, to=35)
 
     curseur_taille.pack(side="left")
-
-    Btn_aff_mercure = tk.Button(win, text='Mercure', width=10, command=btn_aff_mercure)
+    #   Boutons d'affichage pour les planètes
+    Btn_aff_mercure = tk.Button(win, text='Mercure', width=10, bg='#797C68', command=btn_aff_mercure)
     Btn_aff_mercure.place(x=100, y=20)
-    Btn_aff_venus = tk.Button(win, text='Venus', width=10, command=btn_aff_venus)
+    Btn_aff_venus = tk.Button(win, text='Venus', width=10, bg='#FF4D00', command=btn_aff_venus)
     Btn_aff_venus.place(x=190, y=20)
-    Btn_aff_terre = tk.Button(win, text='Terre', width=10, command=btn_aff_terre)
+    Btn_aff_terre = tk.Button(win, text='Terre', width=10, bg='#0042FF', command=btn_aff_terre)
     Btn_aff_terre.place(x=280, y=20)
-
+    Btn_aff_mars = tk.Button(win, text='Mars', width=10, bg='#C80101', command=btn_aff_mars)
+    Btn_aff_mars.place(x=100, y=60)
+    Btn_aff_jupiter = tk.Button(win, text='Jupiter', width=10, bg='#dc6e37', command=btn_aff_jupiter)
+    Btn_aff_jupiter.place(x=190, y=60)
+    Btn_aff_saturne = tk.Button(win, text='Saturne', width=10, bg='#ffdead', command=btn_aff_saturne)
+    Btn_aff_saturne.place(x=280, y=60)
+    Btn_aff_uranus = tk.Button(win, text='Uranus', width=10, bg='#c0d6e4', command=btn_aff_uranus)
+    Btn_aff_uranus.place(x=140, y=100)
+    Btn_aff_neptune = tk.Button(win, text='Neptune', width=10, bg='#0049bb', command=btn_aff_neptune)
+    Btn_aff_neptune.place(x=230, y=100)
 
 #   Boutons de paramétrages
-Btn_settings = tk.Button(root, text='Settings', width=10, command=settings)
+Btn_settings = tk.Button(root, text='Settings', width=10, command=settings, bg='orange')
 Btn_settings.pack()
 
 
