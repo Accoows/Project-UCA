@@ -4,12 +4,11 @@ from random import *
 
 ################# Idee à faire #####################
 # Installation d'un curseur qui multiplie le temps 
-# Modification de la taille des planetes et distance avec le soleil
-# Ajouter au supprimer l'apparition d'une planete
+# Modification de la taille des planetes et distance avec le soleil OK
+# Ajouter au supprimer l'apparition d'une planete OK
 # Ajouter du texte si possible sur les planètes 
 # Ajouter une zone de légende pour les planètes
-# Curseur pour faire un zoom si possible en augmentant la zone de rotation et la taille des planètes
-#Affichage système solaire en 2006 avec Pluton et sans pluton (2014)
+# Curseur pour faire un zoom si possible en augmentant la zone de rotation et la taille des planètes OK
 ###################################################
 
 (Hauteur, Largeur) = (700, 1400)
@@ -82,6 +81,15 @@ class État():
         ############################
 
         self.pause = False
+        self.aff_mercure = True
+        self.aff_venus = True
+        self.aff_terre = True
+        self.aff_mars = True
+        self.aff_jupiter = True
+        self.aff_saturne = True
+        self.aff_uranus = True
+        self.aff_neptune = True
+
         self.affichage()
 
     def affichage(self):
@@ -114,23 +122,32 @@ class État():
 
         # Profondeur Mercure -> Soleil
         if y0 >= y1:
-            disque(x1, y1, self.rayon_mercure, '#797C68')
+            if self.aff_mercure:
+                disque(x1, y1, self.rayon_mercure, '#797C68')
             disque(x0, y0, self.rayon_soleil, '#ECD600')
         else:
             disque(x0, y0, self.rayon_soleil, '#ECD600')
-            disque(x1, y1, self.rayon_mercure, '#797C68')
-        disque(x2, y2, self.rayon_venus, '#FF4D00')
+            if self.aff_mercure:
+                disque(x1, y1, self.rayon_mercure, '#797C68')
+        if self.aff_venus:
+            disque(x2, y2, self.rayon_venus, '#FF4D00')
         #
-        if y3 >= y4:
-            disque(x4, y4, self.rayon_lune, '#A4A4A4')
-        disque(x3, y3, self.rayon_terre, '#0042FF')
-        if y3 < y4:
-            disque(x4, y4, self.rayon_lune, '#A4A4A4')
-        disque(x5, y5, self.rayon_mars, '#C80101')
-        disque(x6, y6, self.rayon_jupiter, '#dc6e37')
-        disque(x7, y7, self.rayon_saturne, couleur='#ffdead')
-        disque(x8, y8, self.rayon_uranus, couleur='#c0d6e4')
-        disque(x9, y9, self.rayon_neptune, couleur='#0049bb')
+        if self.aff_terre:
+            if y3 >= y4:
+                disque(x4, y4, self.rayon_lune, '#A4A4A4')
+            disque(x3, y3, self.rayon_terre, '#0042FF')
+            if y3 < y4:
+                disque(x4, y4, self.rayon_lune, '#A4A4A4')
+        if self.aff_mars:
+            disque(x5, y5, self.rayon_mars, '#C80101')
+        if self.aff_jupiter:
+            disque(x6, y6, self.rayon_jupiter, '#dc6e37')
+        if self.aff_saturne:
+            disque(x7, y7, self.rayon_saturne, couleur='#ffdead')
+        if self.aff_uranus:
+            disque(x8, y8, self.rayon_uranus, couleur='#c0d6e4')
+        if self.aff_neptune:
+            disque(x9, y9, self.rayon_neptune, couleur='#0049bb')
 
 
 #############################################################################
@@ -203,6 +220,26 @@ def modif_taille_planete(x):
 def pause(event):
     état.pause = not état.pause
 
+#   Event Clavier 'D,F,G,H,J,K,L,M'
+def aff_mercure(event): état.aff_mercure = not état.aff_mercure
+def aff_venus(event): état.aff_venus = not état.aff_venus
+def aff_terre(event): état.aff_terre = not état.aff_terre
+def aff_mars(event): état.aff_mars = not état.aff_mars
+def aff_jupiter(event): état.aff_jupiter = not état.aff_jupiter
+def aff_saturne(event): état.aff_saturne = not état.aff_saturne
+def aff_uranus(event): état.aff_uranus = not état.aff_uranus
+def aff_neptune(event): état.aff_neptune = not état.aff_neptune
+
+#   Event Boutons Settings
+def btn_aff_mercure(): état.aff_mercure = not état.aff_mercure
+def btn_aff_venus(): état.aff_venus = not état.aff_venus
+def btn_aff_terre(): état.aff_terre = not état.aff_terre
+def btn_aff_mars(): état.aff_mars = not état.aff_mars
+def btn_aff_jupiter(): état.aff_jupiter = not état.aff_jupiter
+def btn_aff_saturne(): état.aff_saturne = not état.aff_saturne
+def btn_aff_uranus(): état.aff_uranus = not état.aff_uranus
+def btn_aff_neptune(): état.aff_neptune = not état.aff_neptune
+
 
 #Curseur d'agrandissement
 # curseur_taille = tk.Scale(root, orient="horizontal", length=Largeur,
@@ -211,22 +248,41 @@ def pause(event):
 #
 # curseur_taille.pack(side="left")
 
+
+#   Toplevel / Nouvelle fenêtre 'Settings'
 def settings():
     win = tk.Toplevel()
     win.title("Settings")
     win.geometry("400x400")
-    (Hauteur, Largeur) = (400, 400)
-    curseur_taille = tk.Scale(win, orient="horizontal"maju,length=Largeur,
+    curseur_taille = tk.Scale(win, orient="vertical", length=Hauteur,
                               label='Taille', command=modif_taille_planete,
                               from_=20, to=35)
 
     curseur_taille.pack(side="left")
 
+    Btn_aff_mercure = tk.Button(win, text='Mercure', width=10, command=btn_aff_mercure)
+    Btn_aff_mercure.place(x=100, y=20)
+    Btn_aff_venus = tk.Button(win, text='Venus', width=10, command=btn_aff_venus)
+    Btn_aff_venus.place(x=190, y=20)
+    Btn_aff_terre = tk.Button(win, text='Terre', width=10, command=btn_aff_terre)
+    Btn_aff_terre.place(x=280, y=20)
 
-Btn_settings = tk.Button(root, text='Settings', width=9, command=settings)
+
+#   Boutons de paramétrages
+Btn_settings = tk.Button(root, text='Settings', width=10, command=settings)
 Btn_settings.pack()
+
+
 
 état = État()
 tictac()
 root.bind('<space>', pause)
+root.bind('d', aff_mercure)
+root.bind('f', aff_venus)
+root.bind('g', aff_terre)
+root.bind('h', aff_mars)
+root.bind('j', aff_jupiter)
+root.bind('k', aff_saturne)
+root.bind('l', aff_uranus)
+root.bind('m', aff_neptune)
 root.mainloop()
