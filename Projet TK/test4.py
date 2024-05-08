@@ -28,7 +28,7 @@ class État():
         self.centre_y = Hauteur // 2
         self.rayon_base = 0
 
-        self.modif_vitesse = 0
+        self.modif_vitesse = 1
 
         ############################
         #Soleil
@@ -222,6 +222,15 @@ def pause(event):
 
 def vitesse_planete(x):
     état.modif_vitesse = int(x)
+    état.vitesse_mercure = (1 / 88) * état.modif_vitesse
+    état.vitesse_venus = (1 / 225) * état.modif_vitesse
+    état.vitesse_terre = (1 / 365) * état.modif_vitesse
+    état.vitesse_lune = (1 / 27.3) * état.modif_vitesse
+    état.vitesse_mars = (1 / 687) * état.modif_vitesse
+    état.vitesse_jupiter = (1 / 4335) * état.modif_vitesse
+    état.vitesse_saturne = (1 / 10757) * état.modif_vitesse
+    état.vitesse_uranus = (1 / 30687) * état.modif_vitesse
+    état.vitesse_neptune = (1 / 60224) * état.modif_vitesse
     état.affichage()
 
 
@@ -282,6 +291,11 @@ def settings():
     Btn_aff_uranus.place(x=140, y=100)
     Btn_aff_neptune = tk.Button(win, text='Neptune', width=10, bg='#0049bb', command=btn_aff_neptune)
     Btn_aff_neptune.place(x=230, y=100)
+    #   Curseur de modification de la vitesse des planètes
+    curseur_vitesse = tk.Scale(win, orient="horizontal", length=Largeur,
+                               label='Vitesse', command=vitesse_planete,
+                                from_=1, to=100)
+    curseur_vitesse.pack(side='bottom')
 
 #   Boutons de paramétrages
 Btn_settings = tk.Button(root, text='Settings', width=10, command=settings, bg='orange')
