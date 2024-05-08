@@ -280,10 +280,28 @@ def settings():
     curseur_taille.pack(side="left")
 
     #   Texte boutons planètes
-    text1 = tk.Label(win, text='Touches de paramétrage', font=("Courier", 10))
-    text1.place(x=380, y=20)
-    text2 = tk.Label(win, text='Touches de paramétrage', font=("Courier", 10))
-    text2.place(x=380, y=20)
+    text_label = tk.Label(win, text='Touches de paramétrage', font=("Courier", 11))
+    text_label.place(x=370, y=30)
+    text_mercure = tk.Label(win, text='<d>  ON/OFF Mercure', font=("Courier", 11))
+    text_mercure.place(x=380, y=80)
+    text_venus = tk.Label(win, text='<f>  ON/OFF Venus', font=("Courier", 11))
+    text_venus.place(x=380, y=100)
+    text_terre = tk.Label(win, text='<g>  ON/OFF Terre', font=("Courier", 11))
+    text_terre.place(x=380, y=120)
+    text_mars = tk.Label(win, text='<h>  ON/OFF Mars', font=("Courier", 11))
+    text_mars.place(x=380, y=140)
+    text_jupiter = tk.Label(win, text='<j>  ON/OFF Jupiter', font=("Courier", 11))
+    text_jupiter.place(x=380, y=160)
+    text_saturne = tk.Label(win, text='<k>  ON/OFF Saturne', font=("Courier", 11))
+    text_saturne.place(x=380, y=180)
+    text_uranus = tk.Label(win, text='<l>  ON/OFF Uranus', font=("Courier", 11))
+    text_uranus.place(x=380, y=200)
+    text_neptune = tk.Label(win, text='<m>  ON/OFF Neptune', font=("Courier", 11))
+    text_neptune.place(x=380, y=220)
+    text_pause = tk.Label(win, text='<space>  ON/OFF Système', font=("Courier", 10))
+    text_pause.place(x=380, y=260)
+    text_neptune = tk.Label(win, text="(En dehors de 'Settings')", font=("Courier", 10))
+    text_neptune.place(x=380, y=280)
 
     #   Boutons d'affichage pour les planètes
     Btn_aff_mercure = tk.Button(win, text='Mercure', height=2, width=10, bg='#797C68', command=btn_aff_mercure)
@@ -303,11 +321,12 @@ def settings():
     Btn_aff_neptune = tk.Button(win, text='Neptune', height=2, width=10, bg='#0049bb', command=btn_aff_neptune)
     Btn_aff_neptune.place(x=210, y=250)
 
+
     #   Curseur de modification de la vitesse des planètes
-    curseur_vitesse = tk.Scale(win, orient="horizontal", length=Largeur,
+    curseur_vitesse = tk.Scale(win, orient="horizontal", length=300,
                                label='Vitesse', command=vitesse_planete,
                                 from_=1, to=100)
-    curseur_vitesse.pack(side='bottom')
+    curseur_vitesse.place(x=50, y=320)
 
     #   Bouton ON/OFF
     #  Bug connu : Si la fenêtre est ouverte puis refermée,
