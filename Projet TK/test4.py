@@ -3,14 +3,14 @@ from math import *
 from random import *
 
 ################# Idee à faire #####################
-# Installation d'un curseur qui multiplie le temps 
+# Installation d'un curseur qui multiplie le temps OK
 # Modification de la taille des planetes et distance avec le soleil OK
 # Ajouter au supprimer l'apparition d'une planete OK
-# Ajouter du texte si possible sur les planètes 
-# Ajouter une zone de légende pour les planètes
+# Ajouter une zone de légende pour les planètes OK
 # Curseur pour faire un zoom si possible en augmentant la zone de rotation et la taille des planètes OK
 ###################################################
 
+#   Initialisation de la fenêtre
 (Hauteur, Largeur) = (700, 1400)
 root = tk.Tk()
 root.title("Système solaire")
@@ -26,11 +26,10 @@ class État():
         self.temps = 0
         self.centre_x = Largeur // 2
         self.centre_y = Hauteur // 2
-        self.rayon_base = 0
+        self.rayon_base = 0 #   Variable pour la fonction de taille
+        self.modif_vitesse = 1  #   Variable de vitesse pour les planètes
 
-        self.modif_vitesse = 1
-
-        ############################
+        ########### Taille et Vitesse des planètes #############
         #Soleil
         self.rayon_soleil = 20
         #Mercure
@@ -62,24 +61,25 @@ class État():
         self.rayon_jupiter = (self.rayon_soleil * 0.6)
         self.rayon_x_jupiter = (self.rayon_soleil * 12)
         self.rayon_y_jupiter = (self.rayon_soleil * 4)
-        self.vitesse_jupiter = (1 / 4335) * self.modif_vitesse * 10
+        self.vitesse_jupiter = (1 / 4335) * self.modif_vitesse * 10     #   fois 10 sinon ça va durer des années...
         #Saturne
         self.rayon_saturne = (self.rayon_soleil * 0.5)
         self.rayon_x_saturne = (self.rayon_soleil * 14)
         self.rayon_y_saturne = (self.rayon_soleil * 5)
-        self.vitesse_saturne = (1 / 10757) * self.modif_vitesse * 10
+        self.vitesse_saturne = (1 / 10757) * self.modif_vitesse * 10    #   fois 10 sinon ça va durer des années...
         #Uranus
         self.rayon_uranus = (self.rayon_soleil * 0.45)
         self.rayon_x_uranus = (self.rayon_soleil * 16)
         self.rayon_y_uranus = (self.rayon_soleil * 6)
-        self.vitesse_uranus = (1 / 30687) * self.modif_vitesse * 10
+        self.vitesse_uranus = (1 / 30687) * self.modif_vitesse * 10     #   fois 10 sinon ça va durer des années...
         #Neptune
         self.rayon_neptune = (self.rayon_soleil * 0.45)
         self.rayon_x_neptune = (self.rayon_soleil * 18)
         self.rayon_y_neptune = (self.rayon_soleil * 7)
-        self.vitesse_neptune = (1 / 60224) * self.modif_vitesse * 10
+        self.vitesse_neptune = (1 / 60224) * self.modif_vitesse * 10    #   fois 10 sinon ça va durer des années...
         ############################
 
+        #   Paramètres de bouton d'affichage
         self.pause = False
         self.aff_mercure = True
         self.aff_venus = True
