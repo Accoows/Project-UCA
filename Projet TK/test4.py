@@ -217,7 +217,10 @@ def modif_taille_planete(x):
 
 
 #Fonction de pause (stop)
+var_on_off = False
 def pause(event):
+    état.pause = not état.pause
+def btn_pause():
     état.pause = not état.pause
 
 def vitesse_planete(x):
@@ -267,42 +270,68 @@ def btn_aff_neptune(): état.aff_neptune = not état.aff_neptune
 def settings():
     win = tk.Toplevel()
     win.title("Settings")
-    win.geometry("400x400")
+    win.geometry("600x400")
+
     #   Curseur de taille
     curseur_taille = tk.Scale(win, orient="vertical", length=Hauteur,
                               label='Taille', command=modif_taille_planete,
                               from_=20, to=35)
 
     curseur_taille.pack(side="left")
+
+    #   Texte boutons planètes
+    text1 = tk.Label(win, text='Touches de paramétrage', font=("Courier", 10))
+    text1.place(x=380, y=20)
+    text2 = tk.Label(win, text='Touches de paramétrage', font=("Courier", 10))
+    text2.place(x=380, y=20)
+
     #   Boutons d'affichage pour les planètes
-    Btn_aff_mercure = tk.Button(win, text='Mercure', width=10, bg='#797C68', command=btn_aff_mercure)
-    Btn_aff_mercure.place(x=100, y=20)
-    Btn_aff_venus = tk.Button(win, text='Venus', width=10, bg='#FF4D00', command=btn_aff_venus)
-    Btn_aff_venus.place(x=190, y=20)
-    Btn_aff_terre = tk.Button(win, text='Terre', width=10, bg='#0042FF', command=btn_aff_terre)
-    Btn_aff_terre.place(x=280, y=20)
-    Btn_aff_mars = tk.Button(win, text='Mars', width=10, bg='#C80101', command=btn_aff_mars)
-    Btn_aff_mars.place(x=100, y=60)
-    Btn_aff_jupiter = tk.Button(win, text='Jupiter', width=10, bg='#dc6e37', command=btn_aff_jupiter)
-    Btn_aff_jupiter.place(x=190, y=60)
-    Btn_aff_saturne = tk.Button(win, text='Saturne', width=10, bg='#ffdead', command=btn_aff_saturne)
-    Btn_aff_saturne.place(x=280, y=60)
-    Btn_aff_uranus = tk.Button(win, text='Uranus', width=10, bg='#c0d6e4', command=btn_aff_uranus)
-    Btn_aff_uranus.place(x=140, y=100)
-    Btn_aff_neptune = tk.Button(win, text='Neptune', width=10, bg='#0049bb', command=btn_aff_neptune)
-    Btn_aff_neptune.place(x=230, y=100)
+    Btn_aff_mercure = tk.Button(win, text='Mercure', height=2, width=10, bg='#797C68', command=btn_aff_mercure)
+    Btn_aff_mercure.place(x=80, y=140)
+    Btn_aff_venus = tk.Button(win, text='Venus', height=2, width=10, bg='#FF4D00', command=btn_aff_venus)
+    Btn_aff_venus.place(x=170, y=140)
+    Btn_aff_terre = tk.Button(win, text='Terre', height=2, width=10, bg='#0042FF', command=btn_aff_terre)
+    Btn_aff_terre.place(x=260, y=140)
+    Btn_aff_mars = tk.Button(win, text='Mars', height=2, width=10, bg='#C80101', command=btn_aff_mars)
+    Btn_aff_mars.place(x=80, y=190)
+    Btn_aff_jupiter = tk.Button(win, text='Jupiter', height=2, width=10, bg='#dc6e37', command=btn_aff_jupiter)
+    Btn_aff_jupiter.place(x=170, y=190)
+    Btn_aff_saturne = tk.Button(win, text='Saturne', height=2, width=10, bg='#ffdead', command=btn_aff_saturne)
+    Btn_aff_saturne.place(x=260, y=190)
+    Btn_aff_uranus = tk.Button(win, text='Uranus', height=2, width=10, bg='#c0d6e4', command=btn_aff_uranus)
+    Btn_aff_uranus.place(x=120, y=250)
+    Btn_aff_neptune = tk.Button(win, text='Neptune', height=2, width=10, bg='#0049bb', command=btn_aff_neptune)
+    Btn_aff_neptune.place(x=210, y=250)
+
     #   Curseur de modification de la vitesse des planètes
     curseur_vitesse = tk.Scale(win, orient="horizontal", length=Largeur,
                                label='Vitesse', command=vitesse_planete,
                                 from_=1, to=100)
     curseur_vitesse.pack(side='bottom')
 
+    #   Bouton ON/OFF
+    #  Bug connu : Si la fenêtre est ouverte puis refermée,
+    #  le bouton revient sur ON alors que le système est en marche.
+    def change_var():
+        global var_on_off
+        if var_on_off:
+            btn_pause()
+            Btn_on_off.config(text='ON', bg='green')
+            var_on_off = False
+        else:
+            btn_pause()
+            Btn_on_off.config(text='OFF', bg='red')
+            var_on_off = True
+
+    Btn_on_off = tk.Button(win, text='ON', height=2, width=15, bg='green', command=change_var)
+    Btn_on_off.place(x=150, y=40)
+
+
 #   Boutons de paramétrages
 Btn_settings = tk.Button(root, text='Settings', width=10, command=settings, bg='orange')
 Btn_settings.pack()
 
-
-
+#   Lancement/Arrêt du programme
 état = État()
 tictac()
 root.bind('<space>', pause)
