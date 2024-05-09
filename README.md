@@ -30,7 +30,7 @@ Les fichiers seront organisés de manière logique pour une navigation aisée. V
 7. TP7 : Modules et types abstraits
 8. TP8 : Ensembles, dictionnaires et matrices
 9. TP9 : Animations et algorithmes
-10. Projet : Création d'un mini jeu à l'aide des différents éléments vu à travers les cours
+10. Projet : Création d'une simulation à l'aide des différents éléments vu à travers les cours
 
 ## Projet Facultatif
 
